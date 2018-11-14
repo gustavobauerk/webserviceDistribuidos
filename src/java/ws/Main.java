@@ -1,6 +1,7 @@
 package ws;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -44,6 +45,20 @@ public class Main {
         ResponseDto response = new ResponseDto();
         try {
             response.setData(rules.searchAirfare(ida, dateIda, dateVolta, origem, destino, numberOfAirfares));
+            response.setStatus(Response.Status.OK.getStatusCode());
+        } catch (Exception ex) {
+            response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
+        }
+        return Response.ok(response).build();
+    }
+
+    @POST
+    @Path("/{id}/{numberOfAirfares}")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Response buyTrips(@PathParam("id") Integer id, @PathParam("numberOfAirfares") Integer numberOfAirfares) {
+        ResponseDto response = new ResponseDto();
+        try {
+            rules.buyAirfare(id, numberOfAirfares);
             response.setStatus(Response.Status.OK.getStatusCode());
         } catch (Exception ex) {
             response.setStatus(Response.Status.NOT_FOUND.getStatusCode());

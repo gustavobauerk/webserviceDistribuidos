@@ -1,12 +1,12 @@
 package ws;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
  *
  */
 public class Hotel {
+    private Integer id;
     /**
      * Cidade do hotel
      */
@@ -22,11 +22,7 @@ public class Hotel {
     /**
      * Data de entrada no hotel, numero de quartos sendo ocupados
      */
-    private HashMap<LocalDate, HashMap<Integer, Integer>> entrada;
-    /**
-     * Data de saida do hotel, numero de quartos sendo ocupados
-     */
-    private HashMap<LocalDate, HashMap<Integer, Integer>> saida;
+    private HashMap<Integer, Integer> numberOfRoomsFree;
 
     public String getCity() {
         return city;
@@ -52,20 +48,20 @@ public class Hotel {
         this.price = price;
     }
 
-    public HashMap<LocalDate, HashMap<Integer, Integer>> getEntrada() {
-        return entrada;
+    public Integer getId() {
+        return id;
     }
 
-    public void setEntrada(HashMap<LocalDate, HashMap<Integer, Integer>> entrada) {
-        this.entrada = entrada;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public HashMap<LocalDate, HashMap<Integer, Integer>> getSaida() {
-        return saida;
+    public HashMap<Integer, Integer> getNumberOfRoomsFree() {
+        return numberOfRoomsFree;
     }
 
-    public void setSaida(HashMap<LocalDate, HashMap<Integer, Integer>> saida) {
-        this.saida = saida;
+    public void setNumberOfRoomsFree(HashMap<Integer, Integer> numberOfRoomsFree) {
+        this.numberOfRoomsFree = numberOfRoomsFree;
     }
 
 }

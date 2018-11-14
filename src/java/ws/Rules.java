@@ -44,7 +44,6 @@ public class Rules {
     }
 
     public synchronized void buyAirfare(Integer id, Integer passagens) throws Exception {
-        List<Trip> result = new ArrayList<>();
         try {
             for (Trip t : trips) {
                 if (t.getId().equals(id) && t.getNumberOfAirfares() >= passagens) {
@@ -61,8 +60,17 @@ public class Rules {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void buyHotel(int id, int quartos, int pessoas) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public synchronized void buyHotel(int id, int quartos, int pessoas) throws Exception {
+        HashMap<Integer, Integer> has = new HashMap<>();
+        try {
+            for (Hotel h : hotels) {
+                if (h.getId().equals(id)) {
+                    has = h.getNumberOfRoomsFree();
+                }
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
     }
 
     public List<Trip> getTrips() {
@@ -104,6 +112,7 @@ public class Rules {
         Random rand = new Random();
         for (int i = 0 ; i < places.size() ; i++) {
             Hotel hotel = new Hotel();
+            hotel.setId(i);
             hotel.setPrice(rand.nextInt(100) + 200);
             HashMap<Integer, Integer> map = new HashMap<>();
             map.put(1, 10);
@@ -112,8 +121,7 @@ public class Rules {
             map.put(4, 10);
             hotel.setNumberOfRoomsTotal(map);
             hotel.setCity(places.get(i));
-            hotel.setEntrada(new HashMap<>());
-            hotel.setSaida(new HashMap<>());
+            hotel.setNumberOfRoomsFree(map);
             hotels.add(hotel);
         }
     }
