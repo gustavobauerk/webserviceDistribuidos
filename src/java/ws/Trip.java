@@ -5,13 +5,12 @@
  */
 package ws;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Classe que simboliza a passagem aérea
  */
-public class Trip implements Serializable {
+public class Trip extends Object {
     private Integer id;
     /**
      * Origem da viagem
@@ -29,7 +28,6 @@ public class Trip implements Serializable {
      * Numero de passagens disponiveis
      */
     private Integer numberOfAirfares;
-
     private Integer price;
 
     /**
@@ -83,6 +81,5 @@ public class Trip implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
 }

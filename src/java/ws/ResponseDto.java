@@ -15,7 +15,7 @@ public class ResponseDto implements Serializable {
     //Código https de resposta
     private Integer status;
     //Lista de dados
-    private List<Trip> data;
+    private List<Trip> trip;
 
     /**
      * Construtor vazio
@@ -40,20 +40,12 @@ public class ResponseDto implements Serializable {
         this.status = status;
     }
 
-    /**
-     * Retorna a lista de dados de treinamento
-     * @return a lista de dados de treinamento
-     */
-    public List<Trip> getData() {
-        return data;
+    public List<Trip> getTrip() {
+        return trip;
     }
 
-    /**
-     * Define a lista de dados de treinamento
-     * @param data lista de dados de treinamento
-     */
-    public void setData(List<Trip> data) {
-        this.data = data;
+    public void setTrip(List<Trip> trip) {
+        this.trip = trip;
     }
 
 }

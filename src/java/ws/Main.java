@@ -44,7 +44,7 @@ public class Main {
         @PathParam("destino") String destino, @PathParam("numberOfAirfares") Integer numberOfAirfares) {
         ResponseDto response = new ResponseDto();
         try {
-            response.setData(rules.searchAirfare(ida, dateIda, dateVolta, origem, destino, numberOfAirfares));
+            response.setTrip(rules.searchAirfare(ida, dateIda, dateVolta, origem, destino, numberOfAirfares));
             response.setStatus(Response.Status.OK.getStatusCode());
         } catch (Exception ex) {
             response.setStatus(Response.Status.NOT_FOUND.getStatusCode());
