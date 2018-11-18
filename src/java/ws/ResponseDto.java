@@ -16,6 +16,7 @@ public class ResponseDto implements Serializable {
     private Integer status;
     //Lista de dados
     private List<Trip> trip;
+    private Hotel hotel;
 
     /**
      * Construtor vazio
@@ -46,6 +47,14 @@ public class ResponseDto implements Serializable {
 
     public void setTrip(List<Trip> trip) {
         this.trip = trip;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
 }
