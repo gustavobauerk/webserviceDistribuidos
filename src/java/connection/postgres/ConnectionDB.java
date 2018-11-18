@@ -64,7 +64,7 @@ public class ConnectionDB {
                 list = trip;
                 break;
             }
-            if(!aux){
+            if (!aux) {
                 list = null;
             }
         } catch (SQLException ex) {
@@ -88,11 +88,11 @@ public class ConnectionDB {
                     String sql1 = "UPDATE voo SET quantidade = " + (aux - quantidade) + " WHERE voo_id = " + aux3.getInt(1);
                     s.executeUpdate(sql1);
                     result = true;
-                    aux1=true;
+                    aux1 = true;
                     break;
                 }
             }
-            if(!aux1){
+            if (!aux1) {
                 result = false;
             }
             disconnect();
@@ -150,9 +150,9 @@ public class ConnectionDB {
             }
             sql2 = "select * from hospedagem where quarto_id in (select quarto_id from quarto where hotel_id = " + hotelId + ") and "
                 + "(('" + Date.valueOf(dateIda) + "' between entrada and saida) or ('" + Date.valueOf(dateVolta)
-                + "' between entrada and saida) or ((entrada between '" + dateIda + "' "
-                + "and '" + dateVolta + "') and (saida between '" + dateIda + "' "
-                + "and '" + dateVolta + "')))";
+                + "' between entrada and saida) or ((entrada between '" + Date.valueOf(dateIda) + "' "
+                + "and '" + Date.valueOf(dateVolta) + "') and (saida between '" + Date.valueOf(dateIda) + "' "
+                + "and '" + Date.valueOf(dateVolta) + "')))";
             ResultSet resultSet2 = s.executeQuery(sql2);
             while (resultSet2.next()) {
                 Quarto quarto = new Quarto();
@@ -234,7 +234,7 @@ public class ConnectionDB {
             hotel.setId(hotelId);
             hotel.setCity(resultSet.getString(2));
             //consulta todos os quartos do hotel disponivel para a data
-            sql1 = "SELECT quarto_id FROM quarto WHERE hotel_id = " + hotelId;
+            sql1 = "SELECT * FROM quarto WHERE hotel_id = " + hotelId;
             //executa query
             ResultSet result1 = s.executeQuery(sql1);
             //retorna os quartos indisponiveis durante a data especificada
@@ -247,8 +247,9 @@ public class ConnectionDB {
             }
             sql2 = "select * from hospedagem where quarto_id in (select quarto_id from quarto where hotel_id = " + hotelId + ") and "
                 + "(('" + Date.valueOf(dateIda) + "' between entrada and saida) or ('" + Date.valueOf(dateVolta)
-                + "' between entrada and saida) or (entrada between '" + dateIda + "' "
-                + "and '" + dateVolta + "'))";
+                + "' between entrada and saida) or ((entrada between '" + Date.valueOf(dateIda) + "' "
+                + "and '" + Date.valueOf(dateVolta) + "') and (saida between '" + Date.valueOf(dateIda) + "' "
+                + "and '" + Date.valueOf(dateVolta) + "')))";
             ResultSet resultSet2 = s.executeQuery(sql2);
             while (resultSet2.next()) {
                 Quarto quarto = new Quarto();
@@ -256,7 +257,6 @@ public class ConnectionDB {
                 quartoResult.add(quarto);
             }
             //disconecta do banco
-            disconnect();
             for (int i = 0 ; i < quartoList.size() ; i++) {
                 Quarto quarto = quartoList.get(i);
                 for (int j = 0 ; j < quartoResult.size() ; j++) {
@@ -301,7 +301,7 @@ public class ConnectionDB {
                 for (Quarto q : quartoResult) {
                     //insert com id do quarto dateIda e dateVolta
                     String sqlInsert = "INSERT INTO hospedagem (quarto_id, entrada, saida) VALUES ("
-                        + q.getId() + ", '" + Date.valueOf(q.getEntrada()) + "', '" + Date.valueOf(q.getSaida()) + "')";
+                        + q.getId() + ", '" + Date.valueOf(dateIda) + "', '" + Date.valueOf(dateVolta) + "')";
                     s.executeUpdate(sqlInsert);
                 }
             }
@@ -313,7 +313,7 @@ public class ConnectionDB {
         return result;
     }
 
-    public void descompraPassagem(LocalDate dateIda, String source, String destino, int quantidade){
+    public void descompraPassagem(LocalDate dateIda, String source, String destino, int quantidade) {
         boolean result = false;
         boolean aux1 = false;
         try {
@@ -328,11 +328,11 @@ public class ConnectionDB {
                     String sql1 = "UPDATE voo SET quantidade = " + (aux + quantidade) + " WHERE voo_id = " + aux3.getInt(1);
                     s.executeUpdate(sql1);
                     result = true;
-                    aux1=true;
+                    aux1 = true;
                     break;
                 }
             }
-            if(!aux1){
+            if (!aux1) {
                 result = false;
             }
             disconnect();

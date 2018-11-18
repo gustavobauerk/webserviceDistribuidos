@@ -39,7 +39,7 @@ public class Rules {
             if (ida && result) {
                 result1 = c.buyTrip(transformInDate(dateVolta), destination, source, numberOfAirfares);
             }
-            if (result1) {
+            if (!result1) {
                 c.descompraPassagem(transformInDate(dateVolta), destination, source, numberOfAirfares);
                 result = false;
             }
